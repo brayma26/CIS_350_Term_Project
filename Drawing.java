@@ -1,9 +1,12 @@
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+
 /**
  * Drawing class -drawing example
  * @author - Mariah Bray
@@ -13,22 +16,13 @@ public class Drawing extends JPanel implements MouseMotionListener {
      @Override
     public void mouseMoved(MouseEvent e) {}
 
-    private int x = -350;
-    private int j = 1400;
-    private int k = 0;
-    private int l = 100;
+    private static int c = 1400;
+    private int a = c+700;
+    private int b = c + 400; 
     private int tall = 475;
-    
-    public static void main(String[] a) {
-         JFrame f = new JFrame();
-        f.setContentPane(new Drawing());
-        f.setSize(1450, 750);
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setVisible(true);
-        
-    }
+    public static boolean drawer = false;
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
 
         // this statement required
         super.paintComponent(g);
@@ -44,20 +38,38 @@ public class Drawing extends JPanel implements MouseMotionListener {
         g.fillRect(0, 450, 1450, 600);
         
         g.setColor(Color.YELLOW);
-        g.fillRect(0, 600, 1450, 10);
-        
-        // draw clouds
-        drawCloud(j,100, g);
-        drawCloud(k,30, g);
-        drawCloud(l,230, g);
+        g.fillRect(0, 600, 1500, 10);
         
         // draw cars
         drawCara( 100,tall, g);
         //drawCarb( z, 575, g);
         addMouseMotionListener(this);
-     
+
+        if(drawer == true){
+            //drawobstacle
+        }
+
+        // draw clouds
+        drawCloud(a,100, g);
+        drawCloud(b,30, g);
+        drawCloud(c, 230, g);
+        a = looper(a);
+        b = looper(b);
+        c = looper(c);
+        repaint();
+
         // drawing must be written in code where pieces on the top layer are be written last
 
+    }
+
+    public int looper(int l){
+        if(l < -10){
+            l = 1500;
+        }
+        else{
+            l = l-1;
+        }
+        return l;
     }
     
     
@@ -70,7 +82,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
         
         g.setColor(Color.WHITE);
         g.fillOval( x + 20, y + 10, 50, 50);
-        
+
     }
     public void drawCara(int x, int y, Graphics g) {
        // create car body
@@ -126,13 +138,9 @@ public class Drawing extends JPanel implements MouseMotionListener {
        g.setColor(Color.WHITE);
        g.fillOval( x - 5, y, 20, 20);
     }
+
     
     public void mouseDragged(MouseEvent e) {
-        x = e.getX();
-        z = 600 - 3 * x / 4;
-        j = 1400 - 3 * x / 2 ;
-        k = 0 + 3 * x / 2 ;
-        l = 100 + x;
 
         if(e.getY() < 425){
             tall = 425;
@@ -145,6 +153,24 @@ public class Drawing extends JPanel implements MouseMotionListener {
         }
         repaint();
         
+    }
+     
+
+    public static void main(String[] a) {
+        JFrame f = new JFrame();
+       f.setContentPane(new Drawing());
+       f.setSize(1450, 750);
+       f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+       f.setVisible(true);
+
+       Timer timer = new Timer(5000 , new ActionListener(){
+        public void actionPerformed(ActionEvent evt) {
+            drawer = true;                             
+        }});
+        timer.setRepeats(true);
+        timer.start();
+
+
     }
 }
 
