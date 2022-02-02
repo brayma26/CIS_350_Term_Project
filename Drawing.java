@@ -22,6 +22,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
     private int b = c + 400; 
     private int tall = 475;
     public static boolean drawer = false;
+    public static boolean crash = false;
 
     public void paintComponent(Graphics g) {
 
@@ -43,7 +44,11 @@ public class Drawing extends JPanel implements MouseMotionListener {
 
         if(drawer == true){
             drawObstacle(o, 550, g);
-            o = looper(o,2);
+            o = looper(o,3);
+        }
+
+        if(o < 300 && o> 100 && tall < 575 && tall > 500 ){
+            crash = true;
         }
         
         // draw cars
@@ -59,6 +64,10 @@ public class Drawing extends JPanel implements MouseMotionListener {
         b = looper(b,1);
         c = looper(c,1);
         repaint();
+
+        if(crash == true){
+            crash(g);
+        }
 
         // drawing must be written in code where pieces on the top layer are be written last
 
@@ -85,6 +94,14 @@ public class Drawing extends JPanel implements MouseMotionListener {
         g.setColor(Color.WHITE);
         g.fillOval( x + 20, y + 10, 50, 50);
 
+    }
+
+    public void crash(Graphics g) {
+        // create car body
+        g.setColor(Color.RED);
+        g.fillRect(0, 0, 1500, 700);
+        g.setColor(Color.WHITE);
+        g.drawString("CRASH!", 650, 300);
     }
 
     public void drawObstacle(int x, int y, Graphics g) {
@@ -171,7 +188,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
        f.setVisible(true);
 
-       Timer timer = new Timer(5000 , new ActionListener(){
+       Timer timer = new Timer(2500 , new ActionListener(){
         public void actionPerformed(ActionEvent evt) {
             drawer = true;                             
         }});
