@@ -12,6 +12,13 @@ import java.awt.event.MouseMotionListener;
 public class Drawing extends JPanel implements MouseMotionListener {
      @Override
     public void mouseMoved(MouseEvent e) {}
+
+    private int x = -350;
+    private int z = 600; 
+    private int j = 500;
+    private int k = 0;
+    private int l = 100;
+    private int tall = 475;
     
     public static void main(String[] a) {
          JFrame f = new JFrame();
@@ -35,10 +42,10 @@ public class Drawing extends JPanel implements MouseMotionListener {
        
         // create road
         g.setColor(Color.GRAY);
-        g.fillRect(0, 150, 600, 450);
+        g.fillRect(0, 450, 1450, 600);
         
         g.setColor(Color.YELLOW);
-        g.fillRect(0, 250, 600, 10);
+        g.fillRect(0, 600, 1450, 10);
         
         // draw clouds
         drawCloud(j,20, g);
@@ -46,14 +53,11 @@ public class Drawing extends JPanel implements MouseMotionListener {
         drawCloud(l,30, g);
         
         // draw cars
-        drawCara( x,175, g);
-        drawCarb( z, 275, g);
+        drawCara( x,tall, g);
+        drawCarb( z, 575, g);
         addMouseMotionListener(this);
      
-        
-        
-        
-        // note that drawing must be written in code so that pieces of the drawing on the top layer must be written last
+        // drawing must be written in code where pieces on the top layer are be written last
 
     }
     
@@ -123,12 +127,6 @@ public class Drawing extends JPanel implements MouseMotionListener {
        g.setColor(Color.WHITE);
        g.fillOval( x - 5, y, 20, 20);
     }
-   
-    private int x = -350;
-    private int z = 600; 
-    private int j = 500;
-    private int k = 0;
-    private int l = 100;
     
     public void mouseDragged(MouseEvent e) {
         x = e.getX();
@@ -136,6 +134,16 @@ public class Drawing extends JPanel implements MouseMotionListener {
         j = 500 - 3 * x / 2 ;
         k = 0 + 3 * x / 2 ;
         l = 100 + x;
+
+        if(e.getY() < 425){
+            tall = 425;
+        }
+        else if(e.getY() > 700){
+            tall = 700;
+        }
+        else{
+            tall = e.getY();
+        }
         repaint();
         
     }
