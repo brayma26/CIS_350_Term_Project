@@ -16,7 +16,8 @@ public class Drawing extends JPanel implements MouseMotionListener {
      @Override
     public void mouseMoved(MouseEvent e) {}
 
-    private static int c = 1400;
+    private int c = 1400;
+    private int o = 1400;
     private int a = c+700;
     private int b = c + 400; 
     private int tall = 475;
@@ -39,35 +40,36 @@ public class Drawing extends JPanel implements MouseMotionListener {
         
         g.setColor(Color.YELLOW);
         g.fillRect(0, 600, 1500, 10);
+
+        if(drawer == true){
+            drawObstacle(o, 550, g);
+            o = looper(o,2);
+        }
         
         // draw cars
         drawCara( 100,tall, g);
         //drawCarb( z, 575, g);
         addMouseMotionListener(this);
 
-        if(drawer == true){
-            //drawobstacle
-        }
-
         // draw clouds
         drawCloud(a,100, g);
         drawCloud(b,30, g);
         drawCloud(c, 230, g);
-        a = looper(a);
-        b = looper(b);
-        c = looper(c);
+        a = looper(a,1);
+        b = looper(b,1);
+        c = looper(c,1);
         repaint();
 
         // drawing must be written in code where pieces on the top layer are be written last
 
     }
 
-    public int looper(int l){
+    public int looper(int l, int p){
         if(l < -10){
             l = 1500;
         }
         else{
-            l = l-1;
+            l = l-p;
         }
         return l;
     }
@@ -84,6 +86,12 @@ public class Drawing extends JPanel implements MouseMotionListener {
         g.fillOval( x + 20, y + 10, 50, 50);
 
     }
+
+    public void drawObstacle(int x, int y, Graphics g) {
+        g.setColor(Color.RED);
+        g.fillPolygon(new int[] {x, x+25, x+50}, new int[] {y, y-50, y}, 3);
+    }
+
     public void drawCara(int x, int y, Graphics g) {
        // create car body
        g.setColor(Color.YELLOW);
