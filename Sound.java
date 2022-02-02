@@ -21,13 +21,6 @@ public class Sound {
             ex.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        String filepath = "Tours-Enthusiast.wav";
-
-        Sound musicObj = new Sound();
-        musicObj.playMusic(filepath);
-    }
 }
 
 

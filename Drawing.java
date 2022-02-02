@@ -195,7 +195,10 @@ public class Drawing extends JPanel implements MouseMotionListener {
         timer.setRepeats(true);
         timer.start();
 
+        String filepath = "Tours-Enthusiast.wav";
 
+        Sound musicObj = new Sound();
+        musicObj.playMusic(filepath);
     }
 }
 
