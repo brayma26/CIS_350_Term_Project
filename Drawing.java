@@ -19,9 +19,11 @@ public class Drawing extends JPanel implements MouseMotionListener {
         f.setSize(600, 400);
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setVisible(true);
-        
-    }
 
+        String filepath = "Tours-Enthusiast.wav";
+        Sound musicObj = new Sound();
+        musicObj.playMusic(filepath);
+    }
     public void paintComponent(Graphics g){
 
         // this statement required
