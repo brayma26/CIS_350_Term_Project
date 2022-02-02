@@ -14,8 +14,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
     public void mouseMoved(MouseEvent e) {}
 
     private int x = -350;
-    private int z = 600; 
-    private int j = 500;
+    private int j = 1400;
     private int k = 0;
     private int l = 100;
     private int tall = 475;
@@ -23,7 +22,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
     public static void main(String[] a) {
          JFrame f = new JFrame();
         f.setContentPane(new Drawing());
-        f.setSize(600, 400);
+        f.setSize(1450, 750);
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setVisible(true);
         
@@ -48,13 +47,13 @@ public class Drawing extends JPanel implements MouseMotionListener {
         g.fillRect(0, 600, 1450, 10);
         
         // draw clouds
-        drawCloud(j,20, g);
-        drawCloud(k,10, g);
-        drawCloud(l,30, g);
+        drawCloud(j,100, g);
+        drawCloud(k,30, g);
+        drawCloud(l,230, g);
         
         // draw cars
-        drawCara( x,tall, g);
-        drawCarb( z, 575, g);
+        drawCara( 100,tall, g);
+        //drawCarb( z, 575, g);
         addMouseMotionListener(this);
      
         // drawing must be written in code where pieces on the top layer are be written last
@@ -131,7 +130,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
     public void mouseDragged(MouseEvent e) {
         x = e.getX();
         z = 600 - 3 * x / 4;
-        j = 500 - 3 * x / 2 ;
+        j = 1400 - 3 * x / 2 ;
         k = 0 + 3 * x / 2 ;
         l = 100 + x;
 
