@@ -21,8 +21,8 @@ public class Drawing extends JPanel implements MouseMotionListener {
     private int o = 1400;
     private int a = c+700;
     private int b = c + 400; 
-    public static boolean drawer = false;
-    public static boolean crash = false;
+    private static boolean drawer = false;
+    private int screen = 1;
 
     Car car = new Car(100,475);
     Background b1 = new Background();
@@ -33,7 +33,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
         // this statement required
         super.paintComponent(g);
 
-        if(crash == false){
+        if(screen == 3){
             // optional: paint the background color (default is white)
             setBackground(Color.CYAN);
 
@@ -45,14 +45,12 @@ public class Drawing extends JPanel implements MouseMotionListener {
                 o1.setX(o);
             }
 
-            if(o < 300 && o> 100 && car.getY() < 575 && car.getY() > 500 ){
-                crash = true;
+            if(o < 300 && o> 100 && car.getY() < 550 && car.getY() > 500 ){
+                screen = 2;
             }
             
-            // draw cars
+            // draw car
             car.drawCar(Color.YELLOW, g);
-
-            addMouseMotionListener(this);
 
             // draw clouds
             b1.drawCloud(a,100, g);
@@ -63,12 +61,18 @@ public class Drawing extends JPanel implements MouseMotionListener {
             c = looper(c,1);
             
         }
-        else{
+        else if(screen == 2){
             b1.drawBackgroundCrash(g);
         }
+        else if(screen == 1){
+            b1.drawStartScreen(g);
+        }
+        else{
+            System.out.println("Error Screen");
+        }
 
+        addMouseMotionListener(this);
         repaint();
-
         // drawing must be written in code where pieces on the top layer are be written last
 
     }
@@ -84,7 +88,8 @@ public class Drawing extends JPanel implements MouseMotionListener {
     }
 
     public void mouseDragged(MouseEvent e) {
-
+        screen = 3;
+        
         if(e.getY() < 425){
             car.setY(425);
         }
@@ -96,6 +101,11 @@ public class Drawing extends JPanel implements MouseMotionListener {
         }
         repaint();
         
+    }
+
+    public void mousePressed(MouseEvent e) {
+        screen = 3;
+        repaint();
     }
      
     public static void main(String[] a) {
@@ -113,6 +123,3 @@ public class Drawing extends JPanel implements MouseMotionListener {
         timer.start();
     }
 }
-
-
-    

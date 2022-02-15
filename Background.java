@@ -24,6 +24,31 @@ public class Background {
 
     }
 
+    public void drawStartScreen(Graphics view) {
+        this.view = view;
+    
+        view.setColor(Color.magenta);
+        view.fillRect(0, 0, 1500, 100);
+        view.fillRect(0, 400, 1500, 100);
+        view.setColor(Color.yellow);
+        view.fillRect(0, 100, 1500, 100);
+        view.fillRect(0, 500, 1500, 100);
+        view.setColor(Color.GREEN);
+        view.fillRect(0, 200, 1500, 100);
+        view.fillRect(0, 600, 1500, 100);
+        view.setColor(Color.CYAN);
+        view.fillRect(0, 300, 1500, 100);
+        view.fillRect(0, 700, 1500, 100);
+
+        // display words
+        view.setColor(Color.BLACK);
+        view.setFont(new Font("Comic Sans", Font.PLAIN, 50)); 
+        view.drawString("Crash Course!", 550, 280);
+        view.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
+        view.drawString("Click and Drag Anywhere to Start", 500, 380);
+
+    }
+
     public void drawCloud(int x, int y, Graphics g) {
         g.setColor(Color.WHITE);
         g.fillOval( x, y, 50, 50);
