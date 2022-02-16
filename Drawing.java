@@ -32,7 +32,6 @@ public class Drawing extends JPanel implements MouseMotionListener {
         super.paintComponent(g);
 
         if(screen == 3){
-            // optional: paint the background color (default is white)
             setBackground(Color.CYAN);
 
             b1.drawBackgroundGame(g);
@@ -49,14 +48,14 @@ public class Drawing extends JPanel implements MouseMotionListener {
 
             g.setColor(Color.BLACK);
             g.setFont(new Font("Comic Sans", Font.PLAIN, 20)); 
-            g.drawString("Obstacles Passed: " + obstaclesPassed, 1100, 50);
+            g.drawString("Obstacles Passed: " + (o1.getCounter() + o2.getCounter()), 1100, 50);
             
         }
         else if(screen == 2){
             b1.drawBackgroundCrash(g);
             g.setColor(Color.WHITE);
             g.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
-            g.drawString("Obstacles Passed: " + obstaclesPassed, 500, 450);
+            g.drawString("Obstacles Passed: " + (o1.getCounter() + o2.getCounter()), 550, 450);
         }
         else if(screen == 1){
             b1.drawStartScreen(g);

@@ -10,6 +10,7 @@ public class Obstacle{
     private Color color;
     private int positionX;
     private int positionY;
+    private int obstacleCounter = 0;
 
     Obstacle(int x, int y){
         positionX = x;
@@ -34,6 +35,10 @@ public class Obstacle{
 
     public int getY(){
         return positionY;
+    }
+
+    public int getCounter(){
+        return obstacleCounter;
     }
     
     public int drawTrafficCone(Graphics view, int carY){
@@ -74,7 +79,7 @@ public class Obstacle{
         if(l < -10){
             positionY = positionY - 11;
             l = 1500;
-            //obstaclesPassed++;
+            obstacleCounter++;
         }
         else{
             l = l-p;
