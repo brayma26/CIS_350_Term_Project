@@ -18,7 +18,6 @@ public class Drawing extends JPanel implements MouseMotionListener {
     public void mouseMoved(MouseEvent e) {}
 
     private int c = 1400;
-    private int o = 1400;
     private int a = c+700;
     private int b = c + 400; 
     private static boolean drawer = false;
@@ -26,7 +25,8 @@ public class Drawing extends JPanel implements MouseMotionListener {
 
     Car car = new Car(100,475);
     Background b1 = new Background();
-    Obstacle o1 = new Obstacle(o, 550);
+    Obstacle o1 = new Obstacle(1400, 500);
+    Obstacle o2 = new Obstacle(1600 + 300, 650);
 
     public void paintComponent(Graphics g) {
 
@@ -40,13 +40,12 @@ public class Drawing extends JPanel implements MouseMotionListener {
             b1.drawBackgroundGame(g);
             
             if(drawer == true){
-                o1.drawObstacle(g);
-                o = looper(o,3);
-                o1.setX(o);
-            }
-
-            if(o < 300 && o> 100 && car.getY() < 550 && car.getY() > 500 ){
-                screen = 2;
+                screen = o1.drawTrafficCone(g, car.getY());
+                o1.setX(looper(o1.getX(),3));
+                if (screen == 3){
+                    screen = o2.drawLog(g, car.getY());
+                    o2.setX(looper(o2.getX(),3));
+                }
             }
             
             // draw car
