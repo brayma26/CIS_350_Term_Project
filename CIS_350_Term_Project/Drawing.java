@@ -12,14 +12,14 @@ import java.awt.event.MouseMotionListener;
  * Drawing class -drawing example
  * @author - Mariah Bray
  * @version - 09/14/20
- */ 
+ */
 public class Drawing extends JPanel implements MouseMotionListener {
-     @Override
+    @Override
     public void mouseMoved(MouseEvent e) {}
 
     private int c = 1400;
     private int a = c+700;
-    private int b = c + 400; 
+    private int b = c + 400;
     private static boolean drawer = false;
     private int screen = 1;
 
@@ -38,7 +38,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
             setBackground(Color.CYAN);
 
             b1.drawBackgroundGame(g);
-            
+
             if(drawer == true){
                 screen = o1.drawTrafficCone(g, car.getY());
                 o1.setX(looper(o1.getX(),3));
@@ -47,7 +47,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
                     o2.setX(looper(o2.getX(),3));
                 }
             }
-            
+
             // draw car
             car.drawCar(Color.YELLOW, g);
 
@@ -58,7 +58,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
             a = looper(a,1);
             b = looper(b,1);
             c = looper(c,1);
-            
+
         }
         else if(screen == 2){
             b1.drawBackgroundCrash(g);
@@ -69,14 +69,6 @@ public class Drawing extends JPanel implements MouseMotionListener {
         else{
             System.out.println("Error Screen");
         }
-
-        if(o < 300 && o> 100 && tall < 575 && tall > 500 ){
-            crash = true;
-        }
-        
-        // draw cars
-        drawCar(100, tall, g, Color.YELLOW);
-        //drawCarb( z, 575, g);
 
         addMouseMotionListener(this);
         repaint();
@@ -94,50 +86,8 @@ public class Drawing extends JPanel implements MouseMotionListener {
         return l;
     }
 
-    public void crash(Graphics g) {
-        // create car body
-        g.setColor(Color.RED);
-        g.fillRect(0, 0, 1500, 700);
-        g.setColor(Color.WHITE);
-        g.drawString("CRASH!", 650, 300);
-    }
-
-    public void drawObstacle(int x, int y, Graphics g) {
-        g.setColor(Color.RED);
-        g.fillPolygon(new int[] {x, x+25, x+50}, new int[] {y, y-50, y}, 3);
-    }
-
-    public void drawCar(int x, int y, Graphics g, Color bodyColor) {
-       // create car body
-       g.setColor(bodyColor);
-       g.fillRect(x, y, 200, 50);
-
-        g.setColor(bodyColor);
-        g.fillOval(x + 30, y - 50, 135, 100);
-        
-        // create windows
-        g.setColor(Color.CYAN);
-        g.fillRect(x + 55, y - 35, 40, 30);
-        
-        g.setColor(Color.CYAN);
-        g.fillRect(x + 105, y - 35, 40, 30);
-        
-        // create wheels
-        g.setColor(Color.BLACK);
-        g.fillOval(x + 20, y + 10, 50, 50);
-        
-        g.setColor(Color.BLACK);
-        g.fillOval(x + 135, y + 10, 50, 50);
-        
-        // create headlights
-        g.setColor(Color.WHITE);
-        g.fillOval(x + 185, y, 20, 20);
-        
-    }
-
     public void mouseDragged(MouseEvent e) {
         screen = 3;
-        
 
         if(e.getY() < 425){
             car.setY(425);
@@ -149,15 +99,14 @@ public class Drawing extends JPanel implements MouseMotionListener {
             car.setY(e.getY());
         }
         repaint();
-        
-    }
 
+    }
 
     public void mousePressed(MouseEvent e) {
         screen = 3;
         repaint();
     }
-     
+
     public static void main(String[] a) {
         JFrame f = new JFrame();
         f.setContentPane(new Drawing());
@@ -165,15 +114,14 @@ public class Drawing extends JPanel implements MouseMotionListener {
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setVisible(true);
 
-       Timer timer = new Timer(2500 , new ActionListener(){
-        public void actionPerformed(ActionEvent evt) {
-            drawer = true;                             
-        }});
+        Timer timer = new Timer(2500 , new ActionListener(){
+            public void actionPerformed(ActionEvent evt) {
+                drawer = true;
+            }});
         timer.setRepeats(true);
         timer.start();
 
-        String filepath = "Tours-Enthusiast.wav";
-        Sound musicObj = new Sound();
-        musicObj.playMusic(filepath);
+        Sound music = new Sound();
+        music.playMusic("Tours-Enthusiast.wav");
     }
 }
