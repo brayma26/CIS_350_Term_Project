@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -52,7 +51,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
         }
         
         // draw cars
-        drawCara( 100,tall, g);
+        drawCar(100, tall, g, Color.YELLOW);
         //drawCarb( z, 575, g);
         addMouseMotionListener(this);
 
@@ -109,12 +108,12 @@ public class Drawing extends JPanel implements MouseMotionListener {
         g.fillPolygon(new int[] {x, x+25, x+50}, new int[] {y, y-50, y}, 3);
     }
 
-    public void drawCara(int x, int y, Graphics g) {
+    public void drawCar(int x, int y, Graphics g, Color bodyColor) {
        // create car body
-       g.setColor(Color.YELLOW);
+       g.setColor(bodyColor);
        g.fillRect(x, y, 200, 50);
 
-        g.setColor(Color.YELLOW);
+        g.setColor(bodyColor);
         g.fillOval(x + 30, y - 50, 135, 100);
         
         // create windows
@@ -136,37 +135,8 @@ public class Drawing extends JPanel implements MouseMotionListener {
         g.fillOval(x + 185, y, 20, 20);
         
     }
-    
-    public void drawCarb(int x, int y, Graphics g) {
-       // create body
-       g.setColor(Color.RED);
-       g.fillRect(x, y, 200, 50);
 
-       g.setColor(Color.RED);
-       g.fillOval(x + 30, y - 50, 135, 100);
-        
-       //create windows
-       g.setColor(Color.CYAN);
-       g.fillRect(x + 55, y - 35, 40, 30);
-        
-       g.setColor(Color.CYAN);
-       g.fillRect(x + 105, y - 35, 40, 30);
-        
-       // create wheels
-       g.setColor(Color.BLACK);
-       g.fillOval(x + 20, y + 10, 50, 50);
-        
-       g.setColor(Color.BLACK);
-       g.fillOval(x + 135, y + 10, 50, 50);
-        
-       // create headlights
-       g.setColor(Color.WHITE);
-       g.fillOval( x - 5, y, 20, 20);
-    }
-
-    
     public void mouseDragged(MouseEvent e) {
-
         if(e.getY() < 425){
             tall = 425;
         }
@@ -179,7 +149,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
         repaint();
         
     }
-     
+
 
     public static void main(String[] a) {
         JFrame f = new JFrame();
@@ -196,11 +166,8 @@ public class Drawing extends JPanel implements MouseMotionListener {
         timer.start();
 
         String filepath = "Tours-Enthusiast.wav";
-
         Sound musicObj = new Sound();
         musicObj.playMusic(filepath);
     }
 }
 
-
-    
