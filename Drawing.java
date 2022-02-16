@@ -1,5 +1,4 @@
 package CIS_350_Term_Project;
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
