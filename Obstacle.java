@@ -38,12 +38,13 @@ public class Obstacle{
     
     public int drawTrafficCone(Graphics view, int carY){
         this.view = view;
+        positionX = looperX(positionX,3);
         view.setColor(trafficColor);
         view.fillPolygon(new int[] {positionX, positionX+25, positionX+50}, new int[] {positionY, positionY-50, positionY}, 3);
         view.fillRect(positionX - 5, positionY, 60, 10);
         view.setColor(Color.WHITE);
         view.fillPolygon(new int[] {positionX+15, positionX+25, positionX+35}, new int[] {positionY-30, positionY-50, positionY-30}, 3);
-        
+
         if(positionX < 300 && positionX> 100 && carY > positionY - 50 && carY < positionY +10 ){
             return 2;
         }
@@ -51,6 +52,7 @@ public class Obstacle{
     }
 
     public int drawLog(Graphics view, int carY){
+        positionX = looperX(positionX,5);
         this.view = view;
         view.setColor(woodColor);
         view.fillOval(positionX, positionY, 60, 60);
@@ -66,5 +68,17 @@ public class Obstacle{
             return 2;
         }
         return 3;
+    }
+
+    public int looperX(int l, int p){
+        if(l < -10){
+            positionY = positionY - 11;
+            l = 1500;
+            //obstaclesPassed++;
+        }
+        else{
+            l = l-p;
+        }
+        return l;
     }
 }
