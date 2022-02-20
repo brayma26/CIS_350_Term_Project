@@ -1,4 +1,5 @@
 package CIS_350_Term_Project;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -121,6 +122,6 @@ public class Drawing extends JPanel implements MouseMotionListener {
         timer.start();
 
         Sound music = new Sound();
-        music.playMusic("Tours-Enthusiast.wav");
+        music.playMusic();
     }
 }

@@ -1,17 +1,18 @@
 package CIS_350_Term_Project;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.*;
 import java.io.File;
 
 public class Sound {
-    void playMusic(String musicLocation){
+    void playMusic(){
         try{
-            File musicpath = new File(musicLocation);
+            // Can cut out "src/" if doesn't work
+            File musicPath = new File("src/CIS_350_Term_Project/Tours-Enthusiast.wav");
 
-            if(musicpath.exists()){
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicpath);
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
