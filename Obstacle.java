@@ -2,45 +2,83 @@ package CIS_350_Term_Project;
 import java.awt.*;
 
 public class Obstacle{
-    Color woodColor = new Color(120,75,0);
-    Color innerColor = new Color(222,188,153);
-    Color trafficColor = new Color(255, 165, 0);
 
     private Graphics view;
-    private Color color;
+    // Represents the X position of the obstacle.
     private int positionX;
+    // Represents the Y position of the obstacle.
     private int positionY;
+    // Represents the number of times the obstacle has been passed successfully.
     private int obstacleCounter = 0;
 
+    //The color used to create bark in the log obstacle.
+    Color woodColor = new Color(120,75,0);
+    //The color used to create wood in the log obstacle.
+    Color innerColor = new Color(222,188,153);
+    //The color used to create the cone in the traffic cone obstacle.
+    Color trafficColor = new Color(255, 165, 0);
+
+    /**
+     * A constructor to create an obstacle.
+     * @param x An integer representing the X position of the obstacle.
+     * @param y An integer representing the Y position of the obstacle.
+     */
     Obstacle(int x, int y){
         positionX = x;
         positionY = y;
     }
 
-    public void setColor(Color color){
-        color = this.color;
-    }
-
+    /**
+     * A method to set the X position of the obstacle.
+     * @param x An integer representing the desired X position of the obstacle.
+     */
     public void setX(int x){
-        positionX = x;
+        if (x > -10 && x<=1600){
+            positionX = x;
+        }
     }
 
+    /**
+     * A method to set the Y position of the obstacle.
+     * @param y An integer representing the desired Y position of the obstacle.
+     */
     public void setY(int y){
-        positionY = y;
+        if (y > 450 && y<750){
+            positionY = y;
+        }
     }
 
+    /**
+     * A method to obtain the X position of the obstacle.
+     * @return An integer representing the X position of the obstacle.
+     */
     public int getX(){
         return positionX;
     }
 
+    /**
+     * A method to obtain the Y position of the obstacle.
+     * @return An integer representing the Y position of the obstacle.
+     */
     public int getY(){
         return positionY;
     }
 
+    /**
+     * A method to obtain the internal count of obstacles the user has passed successfully.
+     * @return An integer representing the obstacles passed count.
+     */
     public int getCounter(){
         return obstacleCounter;
     }
     
+    /**
+     * A method to create a traffic cone and control the requierments of a crash for this specific obstacle.
+     * @param view A Graphics type object, this must be the same as the Graphics object used in all classes.
+     * @param carY An integer representing the Y position of the user's car.
+     * @return An interger representing the games state. 2 will be returned if a crash has occured, 
+     * 3 will be returned if the game continues as normal.
+     */
     public int drawTrafficCone(Graphics view, int carY){
         this.view = view;
         positionX = looperX(positionX,3);
@@ -56,6 +94,13 @@ public class Obstacle{
         return 3;
     }
 
+    /**
+     * A method to create a log and control the requierments of a crash for this specific obstacle.
+     * @param view A Graphics type object, this must be the same as the Graphics object used in all classes.
+     * @param carY An integer representing the Y position of the user's car.
+     * @return An interger representing the games state. 2 will be returned if a crash has occured, 
+     * 3 will be returned if the game continues as normal.
+     */
     public int drawLog(Graphics view, int carY){
         positionX = looperX(positionX,5);
         this.view = view;
@@ -75,9 +120,15 @@ public class Obstacle{
         return 3;
     }
 
+    /**
+     * A method to allow obstacle to loop back around once they have gone off screen
+     * @param l An integer representing the obstacles X position on screen.
+     * @param p An integer representing how many pixels the obstacle is to move each loop.
+     * @return An interger representing the new X position of the obstacle.
+     */
     public int looperX(int l, int p){
         if(l < -10){
-            positionY = positionY - 11;
+            //positionY = positionY - 11;
             l = 1500;
             obstacleCounter++;
         }

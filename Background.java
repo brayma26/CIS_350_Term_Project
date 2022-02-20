@@ -3,14 +3,27 @@ import java.awt.*;
 public class Background {
 
     private Graphics view;
+    //Represents the X position of the first cloud in the background.
     private int firstCloud = 0;
+    //Represents the X position of the second cloud in the background.
     private int secondCloud = firstCloud + 400;
+    //Represents the X position of the third cloud in the background.
     private int thirdCloud = firstCloud + 700;
 
+    /**
+     * A constructor to create the games background.
+     * @param firstCloud An integer representing the X position 
+     * of the first cloud in the background (Recommended : 0).
+     */
     Background(int firstCloud){
         this.firstCloud = firstCloud;
     }
     
+    /**
+     * A method to draw the games background when it is being played.
+     * @param view A Graphics type object, this must be the same as 
+     * the Graphics object used in all classes. 
+     */
     public void drawBackgroundGame(Graphics view) {
         this.view = view;
        
@@ -32,6 +45,11 @@ public class Background {
 
     }
 
+    /**
+     * A method to draw the games background when it has yet to be started.
+     * @param view A Graphics type object, this must be the same as 
+     * the Graphics object used in all classes. 
+     */
     public void drawStartScreen(Graphics view) {
         this.view = view;
     
@@ -57,6 +75,11 @@ public class Background {
 
     }
 
+    /**
+     * A method to draw clouds for the games background.
+     * @param x An integer representing the cloud's X position on screen.
+     * @param y An integer representing the cloud's Y position on screen.
+     */
     public void drawCloud(int x, int y, Graphics view) {
 
         view.setColor(Color.WHITE);
@@ -69,6 +92,12 @@ public class Background {
         view.fillOval( x + 20, y + 10, 50, 50);
     }
 
+    /**
+     * A method to allow clouds to loop back around once they have gone off screen
+     * @param l An integer representing the cloud's X position on screen.
+     * @param p An integer representing how many pixels the cloud is to move each loop.
+     * @return An interger representing the new X position of the cloud.
+     */
     public int looperCloud(int l, int p){
         if(l < -10){
             l = 1500;
@@ -79,6 +108,11 @@ public class Background {
         return l;
     }
 
+    /**
+     * A method to draw the games background when a crash has occured.
+     * @param view A Graphics type object, this must be the same as 
+     * the Graphics object used in all classes. 
+     */
     public void drawBackgroundCrash(Graphics view) {
         this.view = view;
         view.setColor(Color.RED);
