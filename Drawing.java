@@ -1,5 +1,4 @@
 package CIS_350_Term_Project;
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,9 +11,9 @@ import java.awt.event.MouseMotionListener;
  * Drawing class -drawing example
  * @author - Mariah Bray
  * @version - 09/14/20
- */ 
+ */
 public class Drawing extends JPanel implements MouseMotionListener {
-     @Override
+    @Override
     public void mouseMoved(MouseEvent e) {}
  
     private static boolean drawer = false;
@@ -35,14 +34,14 @@ public class Drawing extends JPanel implements MouseMotionListener {
             setBackground(Color.CYAN);
 
             b1.drawBackgroundGame(g);
-            
+
             if(drawer == true){
                 screen = o1.drawTrafficCone(g, car.getY());
                 if (screen == 3){
                     screen = o2.drawLog(g, car.getY());
                 }
             }
-            
+
             // draw car
             car.drawCar(Color.YELLOW, g);
 
@@ -72,7 +71,7 @@ public class Drawing extends JPanel implements MouseMotionListener {
 
     public void mouseDragged(MouseEvent e) {
         screen = 3;
-        
+
         if(e.getY() < 425){
             car.setY(425);
         }
@@ -83,14 +82,14 @@ public class Drawing extends JPanel implements MouseMotionListener {
             car.setY(e.getY());
         }
         repaint();
-        
+
     }
 
     public void mousePressed(MouseEvent e) {
         screen = 3;
         repaint();
     }
-     
+
     public static void main(String[] a) {
         JFrame f = new JFrame();
         f.setContentPane(new Drawing());
@@ -98,11 +97,14 @@ public class Drawing extends JPanel implements MouseMotionListener {
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setVisible(true);
 
-       Timer timer = new Timer(2500 , new ActionListener(){
-        public void actionPerformed(ActionEvent evt) {
-            drawer = true;                             
-        }});
+        Timer timer = new Timer(2500 , new ActionListener(){
+            public void actionPerformed(ActionEvent evt) {
+                drawer = true;
+            }});
         timer.setRepeats(true);
         timer.start();
+
+        Sound music = new Sound();
+        music.playMusic("Tours-Enthusiast.wav");
     }
 }

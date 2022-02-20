@@ -61,7 +61,7 @@ public class Car{
          // create headlights
         view.setColor(Color.WHITE);
         view.fillOval(positionX + 185, positionY, 20, 20);
-         
+
     }
 
 }
