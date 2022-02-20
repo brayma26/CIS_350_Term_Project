@@ -16,15 +16,13 @@ import java.awt.event.MouseMotionListener;
 public class Drawing extends JPanel implements MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent e) {}
-
-    private int c = 1400;
-    private int a = c+700;
-    private int b = c + 400;
+ 
     private static boolean drawer = false;
     private int screen = 1;
+    private int obstaclesPassed = 0;
 
     Car car = new Car(100,475);
-    Background b1 = new Background();
+    Background b1 = new Background(1400);
     Obstacle o1 = new Obstacle(1400, 500);
     Obstacle o2 = new Obstacle(1600 + 300, 650);
 
@@ -34,34 +32,30 @@ public class Drawing extends JPanel implements MouseMotionListener {
         super.paintComponent(g);
 
         if(screen == 3){
-            // optional: paint the background color (default is white)
             setBackground(Color.CYAN);
 
             b1.drawBackgroundGame(g);
 
             if(drawer == true){
                 screen = o1.drawTrafficCone(g, car.getY());
-                o1.setX(looper(o1.getX(),3));
                 if (screen == 3){
                     screen = o2.drawLog(g, car.getY());
-                    o2.setX(looper(o2.getX(),3));
                 }
             }
 
             // draw car
             car.drawCar(Color.YELLOW, g);
 
-            // draw clouds
-            b1.drawCloud(a,100, g);
-            b1.drawCloud(b,30, g);
-            b1.drawCloud(c, 230, g);
-            a = looper(a,1);
-            b = looper(b,1);
-            c = looper(c,1);
-
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Comic Sans", Font.PLAIN, 20)); 
+            g.drawString("Obstacles Passed: " + (o1.getCounter() + o2.getCounter()), 1100, 50);
+            
         }
         else if(screen == 2){
             b1.drawBackgroundCrash(g);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
+            g.drawString("Obstacles Passed: " + (o1.getCounter() + o2.getCounter()), 550, 450);
         }
         else if(screen == 1){
             b1.drawStartScreen(g);
@@ -74,16 +68,6 @@ public class Drawing extends JPanel implements MouseMotionListener {
         repaint();
         // drawing must be written in code where pieces on the top layer are be written last
 
-    }
-
-    public int looper(int l, int p){
-        if(l < -10){
-            l = 1500;
-        }
-        else{
-            l = l-p;
-        }
-        return l;
     }
 
     public void mouseDragged(MouseEvent e) {
