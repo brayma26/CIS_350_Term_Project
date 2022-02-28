@@ -1,5 +1,4 @@
 package CIS_350_Term_Project;
-
 import java.awt.*;
 
 public class Obstacle{
@@ -80,7 +79,7 @@ public class Obstacle{
      * @return An interger representing the games state. 2 will be returned if a crash has occured, 
      * 3 will be returned if the game continues as normal.
      */
-    public int drawTrafficCone(Graphics view, int carY){
+    public int drawTrafficCone(Graphics view, Car car){
         this.view = view;
         positionX = looperX(positionX,3);
         view.setColor(trafficColor);
@@ -89,7 +88,9 @@ public class Obstacle{
         view.setColor(Color.WHITE);
         view.fillPolygon(new int[] {positionX+15, positionX+25, positionX+35}, new int[] {positionY-30, positionY-50, positionY-30}, 3);
 
-        if(positionX < 300 && positionX> 100 && carY > positionY - 50 && carY < positionY +10 ){
+        if(positionX < 300 && positionX> 200 && car.getY() > positionY - 50 && car.getY() < positionY +10 ){
+            positionX = positionX - 200;
+            car.setLives(car.getLives() - 1);
             return 2;
         }
         return 3;
@@ -102,7 +103,7 @@ public class Obstacle{
      * @return An interger representing the games state. 2 will be returned if a crash has occured, 
      * 3 will be returned if the game continues as normal.
      */
-    public int drawLog(Graphics view, int carY){
+    public int drawLog(Graphics view, Car car){
         positionX = looperX(positionX,5);
         this.view = view;
         view.setColor(woodColor);
@@ -115,7 +116,9 @@ public class Obstacle{
         view.drawOval(positionX+20, positionY+20, 20, 20);
         view.drawOval(positionX+25, positionY+25, 10, 10);
         
-        if(positionX < 300 && positionX> 100 && carY > positionY && carY < positionY +60 ){
+        if(positionX < 300 && positionX> 200 && car.getY() > positionY - 60 && car.getY() < positionY +30 ){
+            positionX = positionX - 200; 
+            car.setLives(car.getLives() - 1);
             return 2;
         }
         return 3;
@@ -139,4 +142,4 @@ public class Obstacle{
         return l;
     }
 }
->>>>>>> 1eb54838b45c15bfb6cd7476f4807b695dab5daf
+

@@ -11,6 +11,8 @@ public class Car{
     private int positionX;
     // Represents the Y position of the obstacle.
     private int positionY;
+    // Represents lives of player.
+    private int lives = 3;
 
     /**
      * A constructor to create a car.
@@ -41,11 +43,27 @@ public class Car{
     }
 
     /**
+     * A method to set the lives left of the car.
+     * @param y An integer representing the desired lives.
+     */
+    public void setLives(int lives){
+        this.lives = lives;
+    }
+
+    /**
      * A method to obtain the X position of the car.
      * @return An integer representing the X position of the car.
      */
     public int getX(){
         return positionX;
+    }
+
+    /**
+     * A method to obtain the lives left of the car.
+     * @return An integer representing the lives left of the car.
+     */
+    public int getLives(){
+        return lives;
     }
 
     /**

@@ -11,7 +11,7 @@ import java.awt.event.MouseMotionListener;
 /**
  * Drawing class -drawing example
  * @author - Mariah Bray
- * @version - 09/14/20
+ * @version - 2/21/22
  */
 public class Drawing extends JPanel implements MouseMotionListener {
     @Override
@@ -19,7 +19,6 @@ public class Drawing extends JPanel implements MouseMotionListener {
  
     private static boolean drawer = false;
     private int screen = 1;
-    private int obstaclesPassed = 0;
 
     Car car = new Car(100,475);
     Background b1 = new Background(1400);
@@ -31,59 +30,70 @@ public class Drawing extends JPanel implements MouseMotionListener {
         // this statement required
         super.paintComponent(g);
 
-        if(screen == 3){
-            setBackground(Color.CYAN);
-
-            b1.drawBackgroundGame(g);
-
-            if(drawer == true){
-                screen = o1.drawTrafficCone(g, car.getY());
-                if (screen == 3){
-                    screen = o2.drawLog(g, car.getY());
-                }
-            }
-
-            // draw car
-            car.drawCar(Color.YELLOW, g);
-
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("Comic Sans", Font.PLAIN, 20)); 
-            g.drawString("Obstacles Passed: " + (o1.getCounter() + o2.getCounter()), 1100, 50);
-            
-        }
-        else if(screen == 2){
+        if(screen == 2 && car.getLives() <= 0){
             b1.drawBackgroundCrash(g);
             g.setColor(Color.WHITE);
             g.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
-            g.drawString("Obstacles Passed: " + (o1.getCounter() + o2.getCounter()), 550, 450);
-        }
-        else if(screen == 1){
-            b1.drawStartScreen(g);
+            g.drawString("Game Over", 600, 500);
+            g.drawString("Obstacles Passed: " + (o1.getCounter() + o2.getCounter()), 550 , 450);
         }
         else{
-            System.out.println("Error Screen");
+
+            if(screen == 3){
+                setBackground(Color.CYAN);
+    
+                b1.drawBackgroundGame(g);
+    
+                if(drawer == true){
+                    screen = o1.drawTrafficCone(g, car);
+                    if (screen == 3){
+                        screen = o2.drawLog(g, car);
+                    }
+                }
+    
+                // draw car
+                car.drawCar(Color.YELLOW, g);
+    
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Comic Sans", Font.PLAIN, 20)); 
+                g.drawString("Obstacles Passed: " + (o1.getCounter() + o2.getCounter()) + " Lives: " + car.getLives(), 1100, 50);
+                
+            }
+            else if(screen == 2){
+                b1.drawBackgroundCrash(g);
+                g.setColor(Color.WHITE);
+                g.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
+                g.drawString("Lives Left: " + car.getLives(), 600, 450);
+                g.drawString("Click to Continue", 600, 500);
+            }
+            else if(screen == 1){
+                b1.drawStartScreen(g);
+            }
+            else{
+                System.out.println("Error Screen");
+            }
+    
+            addMouseMotionListener(this);
+            repaint();
+            // drawing must be written in code where pieces on the top layer are be written last
         }
-
-        addMouseMotionListener(this);
-        repaint();
-        // drawing must be written in code where pieces on the top layer are be written last
-
-    }
-
-    public void mouseDragged(MouseEvent e) {
-        screen = 3;
-
-        if(e.getY() < 425){
-            car.setY(425);
+    
         }
-        else if(e.getY() > 700){
-            car.setY(700);
-        }
-        else{
-            car.setY(e.getY());
-        }
-        repaint();
-
+    
+        public void mouseDragged(MouseEvent e) {
+            screen = 3;
+    
+            if(e.getY() < 425){
+                car.setY(425);
+            }
+            else if(e.getY() > 700){
+                car.setY(700);
+            }
+            else{
+                car.setY(e.getY());
+            }
+            
+            repaint();
     }
 
     public void mousePressed(MouseEvent e) {
