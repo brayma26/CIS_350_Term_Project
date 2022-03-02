@@ -2,6 +2,6 @@
 # CrashCourse
 ## A Simple Racing Game
 
-- Pick a Car color!
+- Pick a Car Color!
 - Avoid Obstacles!
 - Have Fun!
