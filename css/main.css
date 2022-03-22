@@ -1,44 +1,29 @@
 body {
-    background: blue;
+    background-image: url("sharon-mccutcheon-epRlEd6oTmE-unsplash.jpg");
     margin: 60px auto;
     width: 70%;
-}
-ul, footer ul {
     font-family:'Helvetica', 'Arial', 'Sans-Serif';
+}
+footer ul {
     padding: 0px;
     list-style: none;
     font-weight: bold;
 }
-ul li, footer ul li {
-    display: inline;
-    margin-right: 20px;
-}
-a {
-    text-decoration: none;
-    color: #999;
-}
-a:hover {
-    text-decoration: underline;
-}
 h1 {
     font-size: 3em;
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+}
+h2 {
+    font-size: 2em;
 }
 p {
     font-size: 1.5em;
     line-height: 1.4em;
-    color: #333;
+}
+p + a {
+    font-size: 1.5em;
+    line-height: 1.4em;
 }
 footer {
-    border-top: 1px solid #d5d5d5;
-    font-size: .8em;
-}
-
-ul.posts { 
-    margin: 20px auto 40px; 
-    font-size: 1.5em;
-}
-
-ul.posts li {
-    list-style: none;
+    border-top: 1px solid #000000;
+    font-size: 1em;
 }
