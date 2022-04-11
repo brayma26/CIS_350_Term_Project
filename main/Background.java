@@ -92,6 +92,13 @@ public class Background {
         
         view.setColor(Color.WHITE);
         view.fillOval( x + 20, y + 10, 50, 50);
+        
+        
+        // Stars
+//        int cordX[] = {x, x-25, x+15, x+40, x+40, x+80, x+40, x+40, x+15, x-25};
+//    	  int cordY[] = {y, y-35, y-20, y-50, y-12, y, y+12, y+50, y+20, y+35};
+//        view.setColor(Color.YELLOW);
+//        view.fillPolygon( cordX, cordY, 10);
     }
 
     /**
