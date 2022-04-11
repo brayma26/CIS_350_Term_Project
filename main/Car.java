@@ -122,7 +122,29 @@ public class Car{
          // create headlights
         view.setColor(Color.WHITE);
         view.fillOval(positionX + 185, positionY, 20, 20);
-
+        
+        
+        //TRUCK
+//        view.setColor(carColor);
+//        view.fillRect(positionX, positionY - 10, 200, 50);
+// 
+//        view.setColor(carColor);
+//        view.fillRect(positionX + 100, positionY - 50, 60, 75);
+         
+         // create windows
+//        view.setColor(Color.DARK_GRAY);
+//        view.fillRect(positionX + 110, positionY - 45, 40, 30);
+         
+         // create wheels
+//        view.setColor(Color.BLACK);
+//        view.fillOval(positionX + 20, positionY + 10, 50, 50);
+         
+//        view.setColor(Color.BLACK);
+//        view.fillOval(positionX + 135, positionY + 10, 50, 50);
+         
+         // create headlights
+//        view.setColor(Color.WHITE);
+//        view.fillRect(positionX + 185, positionY, 15, 15);
     }
 
 }
