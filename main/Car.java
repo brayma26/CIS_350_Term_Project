@@ -1,5 +1,6 @@
 package main;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Car class - Manages and draws cars of Crash Course Game.
@@ -17,6 +18,8 @@ public class Car{
     private int positionY;
     // Represent the lives of player.
     private int lives = 3;
+    
+    private ArrayList<Point> points = new ArrayList<Point>();
 
     /**
      * A constructor to create a car.
@@ -90,6 +93,14 @@ public class Car{
     }
     
     /**
+     * A method to obtain the Array List of points that represent an car.
+     * @return An Array List of points representing the car.
+     */
+    public ArrayList<Point> getPoints(){
+        return points;
+    }
+    
+    /**
      * A method to create a Volkswagen Beetle.
      * @param view A Graphics type object, this must be the same as the Graphics object used in all classes.
      */
@@ -97,11 +108,18 @@ public class Car{
         if(carColor == null){
             carColor = Color.pink;
         }
+        points.clear();
 
         // create car body
         view.setColor(carColor);
         view.fillRect(positionX, positionY, 200, 50);
- 
+        
+        for(int i=positionX + 100; i <= positionX + 200; ++i) {
+        	for(int j=positionY; j <= positionY + 50; ++j) {
+        		points.add(new Point(i,j));
+        	}
+        }
+        
         view.setColor(carColor);
         view.fillOval(positionX + 30, positionY - 50, 135, 100);
          
@@ -123,28 +141,44 @@ public class Car{
         view.setColor(Color.WHITE);
         view.fillOval(positionX + 185, positionY, 20, 20);
         
+    }
+    
+    public void drawTruck(Graphics view) {
+    	points.clear();
+    	
+        if(carColor == null){
+            carColor = Color.pink;
+        }
         
         //TRUCK
-//        view.setColor(carColor);
-//        view.fillRect(positionX, positionY - 10, 200, 50);
-// 
-//        view.setColor(carColor);
-//        view.fillRect(positionX + 100, positionY - 50, 60, 75);
+        view.setColor(carColor);
+        view.fillRect(positionX, positionY - 10, 200, 50);
+        
+        //Create point array to represent truck
+        for(int i=positionX + 100; i <= positionX + 200; ++i) {
+        	for(int j=positionY - 10; j <= positionY + 40; ++j) {
+        		points.add(new Point(i,j));
+        	}
+        }
+ 
+        view.setColor(carColor);
+        view.fillRect(positionX + 100, positionY - 50, 60, 75);
          
          // create windows
-//        view.setColor(Color.DARK_GRAY);
-//        view.fillRect(positionX + 110, positionY - 45, 40, 30);
+        view.setColor(Color.DARK_GRAY);
+        view.fillRect(positionX + 110, positionY - 45, 40, 30);
          
          // create wheels
-//        view.setColor(Color.BLACK);
-//        view.fillOval(positionX + 20, positionY + 10, 50, 50);
+        view.setColor(Color.BLACK);
+        view.fillOval(positionX + 20, positionY + 10, 50, 50);
          
-//        view.setColor(Color.BLACK);
-//        view.fillOval(positionX + 135, positionY + 10, 50, 50);
+        view.setColor(Color.BLACK);
+        view.fillOval(positionX + 135, positionY + 10, 50, 50);
          
          // create headlights
-//        view.setColor(Color.WHITE);
-//        view.fillRect(positionX + 185, positionY, 15, 15);
+        view.setColor(Color.WHITE);
+        view.fillRect(positionX + 185, positionY, 15, 15);
+        
     }
 
 }

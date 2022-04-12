@@ -1,5 +1,6 @@
 package main;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Obstacle class - Manages and draws obstacles of Crash Course Game.
@@ -21,6 +22,8 @@ public class Obstacle{
     private Color innerColor = new Color(222,188,153);
     //The color used to create the cone in the traffic cone obstacle.
     private Color trafficColor = new Color(255, 100, 0);
+    
+    private ArrayList<Point> points = new ArrayList<Point>();
 
     /**
      * A constructor to create an obstacle.
@@ -76,38 +79,56 @@ public class Obstacle{
         return obstacleCounter;
     }
     
+    public void move() {
+    	positionX = looperX(positionX, 220);
+    	points.clear();
+    }
+    
+    /**
+     * A method to obtain the Array List of points that represent an obstacle.
+     * @return An Array List of points representing the obstacle
+     */
+    public ArrayList<Point> getPoints(){
+        return points;
+    }
+    
     /**
      * A method to create a traffic cone and control the requirements of a crash for this specific obstacle.
      * @param view A Graphics type object, this must be the same as the Graphics object used in all classes.
-     * @param car A Car object representing the user's car.
-     * @return An integer representing the games state. 2 will be returned if a crash has occurred,
-     * 3 will be returned if the game continues as normal.
      */
-    public int drawTrafficCone(Graphics view, Car car){
-        positionX = looperX(positionX,3);
+    public void drawTrafficCone(Graphics view){
+    	
+    	points.clear();
+    	
+        positionX = looperX(positionX,4);
         view.setColor(trafficColor);
         view.fillPolygon(new int[] {positionX, positionX+25, positionX+50}, new int[] {positionY, positionY-50, positionY}, 3);
         view.fillRect(positionX - 5, positionY, 60, 10);
         view.setColor(Color.WHITE);
         view.fillPolygon(new int[] {positionX+15, positionX+25, positionX+35}, new int[] {positionY-30, positionY-50, positionY-30}, 3);
-
-        if(positionX < 300 && positionX> 200 && car.getY() > positionY - 50 && car.getY() < positionY +10 ){
-            positionX = positionX - 200;
-            car.setLives(car.getLives() - 1);
-            return 2;
+        
+        //Create point array to represent triangle
+        for(int i=positionX - 5; i <= positionX + 55; ++i) {
+        	for(int j=positionY; j <= positionY + 10; ++j) {
+        		points.add(new Point(i,j));
+        	}
         }
-        return 3;
+        
+        for(int i=positionX + 15; i <= positionX + 35; ++i) {
+        	for(int j= positionY - 30; j <= positionY; ++j) {
+        		points.add(new Point(i,j));
+        	}
+        }
+
     }
 
     /**
      * A method to create a log and control the requirements of a crash for this specific obstacle.
      * @param view A Graphics type object, this must be the same as the Graphics object used in all classes.
-     * @param car A Car object representing the user's car.
-     * @return An integer representing the games state. 2 will be returned if a crash has occurred,
-     * 3 will be returned if the game continues as normal.
      */
-    public int drawLog(Graphics view, Car car){
-        positionX = looperX(positionX,5);
+    public void drawLog(Graphics view){
+    	points.clear();
+        positionX = looperX(positionX,6);
         view.setColor(woodColor);
         view.fillOval(positionX, positionY, 60, 60);
         view.setColor(innerColor);
@@ -118,12 +139,12 @@ public class Obstacle{
         view.drawOval(positionX+20, positionY+20, 20, 20);
         view.drawOval(positionX+25, positionY+25, 10, 10);
         
-        if(positionX < 300 && positionX> 200 && car.getY() > positionY - 60 && car.getY() < positionY +30 ){
-            positionX = positionX - 200; 
-            car.setLives(car.getLives() - 1);
-            return 2;
+        //Create point array to represent log
+        for(int i=positionX + 5; i <= positionX + 55; ++i) {
+        	for(int j=positionY + 5; j <= positionY + 55; ++j) {
+        		points.add(new Point(i,j));
+        	}
         }
-        return 3;
     }
 
     /**

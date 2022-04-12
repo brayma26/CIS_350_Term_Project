@@ -93,12 +93,19 @@ public class Background {
         view.setColor(Color.WHITE);
         view.fillOval( x + 20, y + 10, 50, 50);
         
-        
-        // Stars
-//        int cordX[] = {x, x-25, x+15, x+40, x+40, x+80, x+40, x+40, x+15, x-25};
-//    	  int cordY[] = {y, y-35, y-20, y-50, y-12, y, y+12, y+50, y+20, y+35};
-//        view.setColor(Color.YELLOW);
-//        view.fillPolygon( cordX, cordY, 10);
+    }
+    
+    /**
+     * A method to draw clouds for the games background.
+     * @param x An integer representing the cloud's X position on screen.
+     * @param y An integer representing the cloud's Y position on screen.
+     */
+    public void drawStars(int x, int y, Graphics view) {
+
+        int cordX[] = {x, x-25, x+15, x+40, x+40, x+80, x+40, x+40, x+15, x-25};
+        int cordY[] = {y, y-35, y-20, y-50, y-12, y, y+12, y+50, y+20, y+35};
+        view.setColor(Color.YELLOW);
+        view.fillPolygon( cordX, cordY, 10);
     }
 
     /**
@@ -129,5 +136,20 @@ public class Background {
         view.setFont(new Font("Comic Sans", Font.PLAIN, 50));
         view.drawString("CRASH!", 600, 300);
     }
+    
+    public void drawTextFinalCrash(Graphics view, int passed) {
+    	view.setColor(Color.WHITE);
+        view.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
+        view.drawString("Game Over", 600, 500);
+        view.drawString("Obstacles Passed: " + passed, 550 , 450);
+    }
+    
+    public void drawTextCrash(Graphics view, int lives) {
+    	view.setColor(Color.WHITE);
+        view.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
+        view.drawString("Lives Left: " + lives, 605, 450);
+        view.drawString("Click to Continue", 575, 500);
+    }
+    
     
 }
