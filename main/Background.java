@@ -30,7 +30,11 @@ public class Background {
      * @param view A Graphics type object, this must be the same as 
      * the Graphics object used in all classes. 
      */
-    public void drawBackgroundGame(Graphics view) {
+    public void drawBackgroundGame(Graphics view, boolean day) {
+    	
+    	// Create Day/Night Mode button
+    	view.setColor(Color.blue);
+        view.fillRect(0, 0, 85, 30);
        
         // create road
         view.setColor(Color.GRAY);
@@ -38,15 +42,32 @@ public class Background {
         
         view.setColor(Color.YELLOW);
         view.fillRect(0, 600, 1500, 10);
-
-        // draw clouds
-        drawCloud(firstCloud,100, view);
-        drawCloud(secondCloud,30, view);
-        drawCloud(thirdCloud, 230, view);
+        
+        if(day) {
+        	// draw clouds
+            drawCloud(firstCloud,100, view);
+            drawCloud(secondCloud,30, view);
+            drawCloud(thirdCloud, 230, view);
+            
+            view.setColor(Color.white);
+            view.setFont(new Font("Comic Sans", Font.PLAIN, 15)); 
+            view.drawString("Night Mode", 6, 20);
+        }
+        else {
+        	// draw clouds
+            drawStar(firstCloud,100, view);
+            drawStar(secondCloud,30, view);
+            drawStar(thirdCloud, 230, view);
+            
+            view.setColor(Color.white);
+            view.setFont(new Font("Comic Sans", Font.PLAIN, 15)); 
+            view.drawString("Day Mode", 8, 20);
+        }
         
         firstCloud = looperCloud(firstCloud,1);
         secondCloud = looperCloud(secondCloud,1);
         thirdCloud = looperCloud(thirdCloud,1);
+        
 
     }
 
@@ -92,6 +113,21 @@ public class Background {
         
         view.setColor(Color.WHITE);
         view.fillOval( x + 20, y + 10, 50, 50);
+        
+    }
+    
+    /**
+     * A method to draw stars for the games background.
+     * @param x An integer representing the star's X position on screen.
+     * @param y An integer representing the star's Y position on screen.
+     */
+    public void drawStar(int x, int y, Graphics view) {
+
+    	// Stars
+    	int cordX[] = {x, x-25, x+15, x+40, x+40, x+80, x+40, x+40, x+15, x-25};
+  	  	int cordY[] = {y, y-35, y-20, y-50, y-12, y, y+12, y+50, y+20, y+35};
+  	  	view.setColor(Color.YELLOW);
+  	  	view.fillPolygon( cordX, cordY, 10);
         
     }
     
@@ -151,5 +187,10 @@ public class Background {
         view.drawString("Click to Continue", 575, 500);
     }
     
+    public void drawCarScreen(Graphics view) {
+        view.setColor(Color.BLACK);
+        view.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
+        view.drawString("Choose a vehicle!", 530, 235);   
+    }
     
 }

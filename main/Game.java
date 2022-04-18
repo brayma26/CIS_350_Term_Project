@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
@@ -14,17 +15,20 @@ import java.util.ArrayList;
  * @author - Mariah Bray, Dylan Howard, Thomas Jones
  * @version - 2/21/22
  */
-public class Game extends JPanel implements MouseMotionListener {
+public class Game extends JPanel implements MouseMotionListener, MouseListener {
     @Override
     public void mouseMoved(MouseEvent e) {}
  
     private static boolean drawer = false;
     private static boolean isCar = false;
     private static boolean isRunning = true;
+    private static boolean isDay = true;
     private int screen = 1;
     private int lives = 3;
     private int passed = 0;
     private Car car = new Car(100,475);
+    private Car choice1 = new Car(250,400);
+    private Car choice2 = new Car(850,400);
     private Background b1 = new Background(1400);
     private ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
     private ArrayList<PowerUp> powers = new ArrayList<PowerUp>();
@@ -41,29 +45,31 @@ public class Game extends JPanel implements MouseMotionListener {
         else{
 
             if(screen == 3){
-                setBackground(Color.CYAN);
+            	if(isDay) {
+            		setBackground(Color.CYAN);
+            	}
+            	else {
+            		setBackground(Color.darkGray);
+            	}
     
-                b1.drawBackgroundGame(g);
+                b1.drawBackgroundGame(g, isDay);
                 
-                //if(drawer){
-	                for(int i = 0; i< obstacles.size(); ++i) {
-	                	if(i%2 == 0) {
-	                		obstacles.get(i).drawTrafficCone(g);
-	                	}
-	                	else {
-	                		obstacles.get(i).drawLog(g);
-	                	}
-	                }
-	                for(int i = 0; i< obstacles.size(); ++i) {
-	                	if(i%2 == 0) {
-	                		powers.get(i).drawFlower(g);
-	                	}
-	                	else {
-	                		//obstacles.get(i).drawLog(g);
-	                	}
-	                }
-	                
-                //}
+                for(int i = 0; i< obstacles.size(); ++i) {
+                	if(i%2 == 0) {
+                		obstacles.get(i).drawTrafficCone(g);
+                	}
+                	else {
+                		obstacles.get(i).drawLog(g);
+                	}
+                }
+                for(int i = 0; i< obstacles.size(); ++i) {
+                	if(i%2 == 0) {
+                		powers.get(i).drawFlower(g);
+                	}
+                	else {
+                		//obstacles.get(i).drawLog(g);
+                	}
+                }
     
                 // draw car
                 if(isCar) {
@@ -84,6 +90,11 @@ public class Game extends JPanel implements MouseMotionListener {
             }
             else if(screen == 1){
                 b1.drawStartScreen(g);
+            }
+            else if(screen == 4){
+                b1.drawCarScreen(g);
+                choice1.drawCar(g);
+                choice2.drawTruck(g);
             }
             else{
                 System.out.println("Error Screen");
@@ -106,6 +117,7 @@ public class Game extends JPanel implements MouseMotionListener {
 			if (crash(car.getPoints(), p.getPoints())) {
 				p.move();
 				lives = lives + 1;
+				
 			}
 		}
 		
@@ -145,28 +157,7 @@ public class Game extends JPanel implements MouseMotionListener {
 		return false;
 	}
 	
-	
     public void mouseDragged(MouseEvent e) {
-
-        if(screen == 1){
-            if(e.getY() < 375 && e.getX() < 725){
-                car.setColor(Color.blue);
-            }
-            else if(e.getY() >= 375 && e.getX() >= 725){
-                car.setColor(Color.green);
-            }
-            else if(e.getY() < 375 && e.getX() >= 725){
-                car.setColor(Color.magenta);
-            }
-            else if(e.getY() >= 375 && e.getX() < 725){
-                car.setColor(Color.YELLOW);
-            }
-            else{
-                car.setColor(Color.PINK);
-            }
-
-        }
-        screen = 3;
 
         if(e.getY() < 425){
             car.setY(425);
@@ -207,8 +198,79 @@ public class Game extends JPanel implements MouseMotionListener {
 
         music.playMusic();
         g.addMouseMotionListener(g);
+        g.addMouseListener(g);
         while(isRunning) {
         	g.run();
         }
     }
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(screen == 1){
+            if(e.getY() < 375 && e.getX() < 725){
+                car.setColor(Color.blue);
+                choice1.setColor(Color.blue);
+                choice2.setColor(Color.blue);
+            }
+            else if(e.getY() >= 375 && e.getX() >= 725){
+                car.setColor(Color.green);
+                choice1.setColor(Color.green);
+                choice2.setColor(Color.green);
+            }
+            else if(e.getY() < 375 && e.getX() >= 725){
+                car.setColor(Color.magenta);
+                choice1.setColor(Color.magenta);
+                choice2.setColor(Color.magenta);
+            }
+            else if(e.getY() >= 375 && e.getX() < 725){
+                car.setColor(Color.YELLOW);
+                choice1.setColor(Color.YELLOW);
+                choice2.setColor(Color.YELLOW);
+            }
+            else{
+                car.setColor(Color.PINK);
+                choice1.setColor(Color.PINK);
+                choice2.setColor(Color.PINK);
+            }
+            screen = 4;
+        }
+		else if(screen == 4){
+            if(e.getX() < 725){
+                isCar = true;
+            }
+            else if(e.getX() >= 725){
+            	isCar = false;
+            }
+            screen = 3;
+        }
+		else if(screen == 3){
+            if(e.getY() < 85 && e.getX() < 30){
+                isDay = false;
+            }
+		}
+		
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
