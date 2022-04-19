@@ -93,7 +93,7 @@ public class Background {
         view.drawString("Crash Course!", 553, 340);
         view.setColor(Color.BLACK);
         view.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
-        view.drawString("Click a Color to Start", 540, 435);
+        view.drawString("Click a Color to Start", 600, 435);
     }
 
     /**

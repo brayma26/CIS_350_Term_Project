@@ -84,7 +84,7 @@ public class PowerUp{
      */
     public void drawFlower(Graphics view){
     	points.clear();
-        positionX = looperX(positionX,4);
+        positionX = looperX(positionX,5);
         
         view.setColor(Color.pink);
         view.fillOval(positionX + 20, positionY + 7, 25, 25);

@@ -103,7 +103,7 @@ public class Obstacle{
     	
     	points.clear();
     	
-        positionX = looperX(positionX,4);
+        positionX = looperX(positionX,7);
         view.setColor(trafficColor);
         view.fillPolygon(new int[] {positionX, positionX+25, positionX+50}, new int[] {positionY, positionY-50, positionY}, 3);
         view.fillRect(positionX - 5, positionY, 60, 10);
@@ -131,7 +131,7 @@ public class Obstacle{
      */
     public void drawLog(Graphics view){
     	points.clear();
-        positionX = looperX(positionX,6);
+        positionX = looperX(positionX,9);
         view.setColor(woodColor);
         view.fillOval(positionX, positionY, 60, 60);
         view.setColor(innerColor);

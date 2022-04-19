@@ -56,7 +56,7 @@ public class Game extends JPanel implements MouseMotionListener, MouseListener {
         }
         else{
 
-            if(screen == 3){
+            if (screen == 3){
             	if(isDay) {
             		setBackground(Color.CYAN);
             	}
