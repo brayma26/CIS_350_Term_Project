@@ -11,17 +11,23 @@ import java.io.File;
  * @version - 2/21/22
  */
 public class Sound {
+	
+	/**
+     * A method to play music during the game.
+     * @return An integer representing success(0) or failure(1).
+     */
     public int playMusic(){
         try{
             // Can cut out "src/" if doesn't work
-            File musicPath = new File("src/CIS_350_Term_Project/Tours-Enthusiast.wav");
-
+            File musicPath = new File("Tours-Enthusiast.wav");
+            
             if(musicPath.exists()){
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+            	AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-            }else{
+            }
+            else{
                 System.out.println("Cant find file");
                 return 1;
             }

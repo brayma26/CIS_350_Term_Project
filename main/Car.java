@@ -10,15 +10,13 @@ import java.util.ArrayList;
 
 public class Car{
 
-    // Represents the color of the car.
+    /** Represents the color of the car. */
     private Color carColor;
-    // Represents the X position of the obstacle.
+    /** Represents the X position of the obstacle. */
     private final int positionX;
-    // Represents the Y position of the obstacle.
+    /** Represents the Y position of the obstacle. */
     private int positionY;
-    // Represent the lives of player.
-    private int lives = 3;
-    
+    /** Represents the location and crash area of the car. */
     private ArrayList<Point> points = new ArrayList<Point>();
 
     /**
@@ -58,30 +56,11 @@ public class Car{
     }
 
     /**
-     * A method to set the lives left of the car.
-     * @param lives An integer representing the desired lives.
-     */
-    public void setLives(int lives){
-
-        if (lives < 4 && lives >= 0){
-            this.lives = lives;
-        }
-    }
-
-    /**
      * A method to obtain the X position of the car.
      * @return An integer representing the X position of the car.
      */
     public int getX(){
         return positionX;
-    }
-
-    /**
-     * A method to obtain the lives left of the car.
-     * @return An integer representing the lives left of the car.
-     */
-    public int getLives(){
-        return lives;
     }
 
     /**
@@ -143,6 +122,10 @@ public class Car{
         
     }
     
+    /**
+     * A method to create a Truck.
+     * @param view A Graphics type object, this must be the same as the Graphics object used in all classes.
+     */
     public void drawTruck(Graphics view) {
     	points.clear();
     	

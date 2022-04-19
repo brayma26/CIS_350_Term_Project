@@ -9,20 +9,20 @@ import java.util.ArrayList;
  */
 public class Obstacle{
 
-    // Represents the X position of the obstacle.
+    /** Represents the X position of the obstacle. */
     private int positionX;
-    // Represents the Y position of the obstacle.
+    /** Represents the Y position of the obstacle. */
     private int positionY;
-    // Represents the number of times the obstacle has been passed successfully.
+    /**  Represents the number of times the obstacle has been passed successfully. */
     private int obstacleCounter = 0;
 
-    //The color used to create bark in the log obstacle.
+    /** The color used to create bark in the log obstacle. */
     private Color woodColor = new Color(65,35,0);
-    //The color used to create wood in the log obstacle.
+    /** The color used to create wood in the log obstacle. */
     private Color innerColor = new Color(222,188,153);
-    //The color used to create the cone in the traffic cone obstacle.
+    /** The color used to create the cone in the traffic cone obstacle. */
     private Color trafficColor = new Color(255, 100, 0);
-    
+    /** Represents the location and crash area of the obstacle. */
     private ArrayList<Point> points = new ArrayList<Point>();
 
     /**
@@ -79,6 +79,9 @@ public class Obstacle{
         return obstacleCounter;
     }
     
+    /**
+     * A method to move the obstacle out of the player's range after a crash.
+     */
     public void move() {
     	positionX = looperX(positionX, 220);
     	points.clear();
@@ -93,7 +96,7 @@ public class Obstacle{
     }
     
     /**
-     * A method to create a traffic cone and control the requirements of a crash for this specific obstacle.
+     * A method to create a traffic cone and control the movement for this specific obstacle.
      * @param view A Graphics type object, this must be the same as the Graphics object used in all classes.
      */
     public void drawTrafficCone(Graphics view){
@@ -123,7 +126,7 @@ public class Obstacle{
     }
 
     /**
-     * A method to create a log and control the requirements of a crash for this specific obstacle.
+     * A method to create a log and control the movement for this specific obstacle.
      * @param view A Graphics type object, this must be the same as the Graphics object used in all classes.
      */
     public void drawLog(Graphics view){

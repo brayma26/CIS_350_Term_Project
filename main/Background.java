@@ -9,11 +9,11 @@ import java.awt.*;
  */
 public class Background {
 
-    //Represents the X position of the first cloud in the background.
+    /** Represents the X position of the first cloud in the background. */
     private int firstCloud = 0;
-    //Represents the X position of the second cloud in the background.
+    /** Represents the X position of the second cloud in the background. */
     private int secondCloud = firstCloud + 400;
-    //Represents the X position of the third cloud in the background.
+    /** Represents the X position of the third cloud in the background. */
     private int thirdCloud = firstCloud + 700;
 
     /**
@@ -39,14 +39,13 @@ public class Background {
         // create road
         view.setColor(Color.GRAY);
         view.fillRect(0, 450, 1450, 600);
-        
         view.setColor(Color.YELLOW);
         view.fillRect(0, 600, 1500, 10);
-        
-        if(day) {
+
+        if (day) {
         	// draw clouds
-            drawCloud(firstCloud,100, view);
-            drawCloud(secondCloud,30, view);
+            drawCloud(firstCloud, 100, view);
+            drawCloud(secondCloud, 30, view);
             drawCloud(thirdCloud, 230, view);
             
             view.setColor(Color.white);
@@ -54,7 +53,7 @@ public class Background {
             view.drawString("Night Mode", 6, 20);
         }
         else {
-        	// draw clouds
+        	// draw stars
             drawStar(firstCloud,100, view);
             drawStar(secondCloud,30, view);
             drawStar(thirdCloud, 230, view);
@@ -67,7 +66,6 @@ public class Background {
         firstCloud = looperCloud(firstCloud,1);
         secondCloud = looperCloud(secondCloud,1);
         thirdCloud = looperCloud(thirdCloud,1);
-        
 
     }
 
@@ -95,7 +93,7 @@ public class Background {
         view.drawString("Crash Course!", 553, 340);
         view.setColor(Color.BLACK);
         view.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
-        view.drawString("Click and Drag a Color to Start", 530, 435);
+        view.drawString("Click a Color to Start", 540, 435);
     }
 
     /**
@@ -173,6 +171,12 @@ public class Background {
         view.drawString("CRASH!", 600, 300);
     }
     
+    /**
+     * A method to draw the games text when the final crash has occurred.
+     * @param view A Graphics type object, this must be the same as 
+     * the Graphics object used in all classes. 
+     * @param passed An integer representing how many objects the player has passed.
+     */
     public void drawTextFinalCrash(Graphics view, int passed) {
     	view.setColor(Color.WHITE);
         view.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
@@ -180,6 +184,12 @@ public class Background {
         view.drawString("Obstacles Passed: " + passed, 550 , 450);
     }
     
+    /**
+     * A method to draw the games text when a crash has occurred.
+     * @param view A Graphics type object, this must be the same as 
+     * the Graphics object used in all classes. 
+     * @param lives An integer representing how many lives the player has left.
+     */
     public void drawTextCrash(Graphics view, int lives) {
     	view.setColor(Color.WHITE);
         view.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
@@ -187,6 +197,12 @@ public class Background {
         view.drawString("Click to Continue", 575, 500);
     }
     
+    /**
+     * A method to draw the vehicle choice screen background.
+     * @param view A Graphics type object, this must be the same as 
+     * the Graphics object used in all classes. 
+     * @param lives An integer representing how many lives the player has left.
+     */
     public void drawCarScreen(Graphics view) {
         view.setColor(Color.BLACK);
         view.setFont(new Font("Comic Sans", Font.PLAIN, 30)); 
