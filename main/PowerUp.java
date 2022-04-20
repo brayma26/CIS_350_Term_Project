@@ -84,7 +84,7 @@ public class PowerUp{
      */
     public void drawFlower(Graphics view){
     	points.clear();
-        positionX = looperX(positionX,5);
+        positionX = looperX(positionX,8);
         
         view.setColor(Color.pink);
         view.fillOval(positionX + 20, positionY + 7, 25, 25);
@@ -112,7 +112,7 @@ public class PowerUp{
     public int looperX(int l, int p){
         if(l < -10){
             //positionY = positionY - 11;
-            l = 3000;
+            l = 4000;
         }
         else{
             l = l-p;

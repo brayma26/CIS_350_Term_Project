@@ -97,6 +97,7 @@ public class Game extends JPanel implements MouseMotionListener, MouseListener {
                 
             }
             else if(screen == 2){
+            	setBackground(Color.white);
                 b1.drawBackgroundCrash(g);
                 b1.drawTextCrash(g, lives);
             }
@@ -289,14 +290,13 @@ public class Game extends JPanel implements MouseMotionListener, MouseListener {
         g.addPowerUp(p1);
 
         Sound music = new Sound();
-        music.playMusic();
+        music.playMusic("main/Tours-Enthusiast.wav");
         g.addMouseMotionListener(g);
         g.addMouseListener(g);
-        while(isRunning) {
+        while(isRunning){
         	g.run();
         }
     }
-	
 	@Override
 	public void mousePressed(MouseEvent e) {}
 
@@ -308,7 +308,7 @@ public class Game extends JPanel implements MouseMotionListener, MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {}
-	
+
 	@Override
     public void mouseMoved(MouseEvent e) {}
 }

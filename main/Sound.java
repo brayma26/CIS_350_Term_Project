@@ -14,12 +14,13 @@ public class Sound {
 	
 	/**
      * A method to play music during the game.
+     * @param music A String representing the file path to desired music.
      * @return An integer representing success(0) or failure(1).
      */
-    public int playMusic(){
+    public int playMusic(String music){
         try{
             // Can cut out "src/" if doesn't work
-            File musicPath = new File("Tours-Enthusiast.wav");
+            File musicPath = new File(music);
             
             if(musicPath.exists()){
             	AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);

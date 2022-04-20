@@ -2,6 +2,10 @@ package main;
 
 import org.junit.jupiter.api.Assertions;
 import java.awt.*;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 /**
  * Test class - Test cases for Crash Course Game.
@@ -17,6 +21,11 @@ public class Test {
     private Obstacle o = new Obstacle(100, 475);
     private Obstacle obstacle = new Obstacle(1400, 500);
     private Sound music = new Sound();
+    private Game g = new Game();
+    private PowerUp PUp = new PowerUp(100,475);
+    private ArrayList<Point> points1 = new ArrayList<Point>();
+    private ArrayList<Point> points2 = new ArrayList<Point>();
+    private JFrame f = new JFrame();
 
     //Tests for Background Class
 
@@ -54,24 +63,15 @@ public class Test {
     }
 
     @org.junit.jupiter.api.Test
-    void getLivesCarTest(){
-        Assertions.assertEquals(car.getLives(), 3);
-    }
-
-    @org.junit.jupiter.api.Test
-    void setLivesCarTest(){
-        car.setLives(2);
-        Assertions.assertEquals(car.getLives(), 2);
-        car.setLives(-1);
-        Assertions.assertEquals(car.getLives(), 2);
-        car.setLives(300);
-        Assertions.assertEquals(car.getLives(), 2);
-    }
-
-    @org.junit.jupiter.api.Test
     void setColorCarTest(){
         car.setColor(Color.PINK);
         Assertions.assertEquals(car.getColor(), Color.PINK);
+    }
+    
+    @org.junit.jupiter.api.Test
+    void getColorCarTest(){
+    	car.setColor(Color.PINK);
+    	Assertions.assertEquals(car.getColor(), Color.PINK);
     }
 
     // Tests for Obstacle Class
@@ -117,6 +117,24 @@ public class Test {
         o.setX(o.looperX(-11, 1));
         Assertions.assertEquals(o.getCounter(), 1);
     }
+    
+    @org.junit.jupiter.api.Test
+    void moveObstacleTest(){
+    	int before = o.getX();
+    	Assertions.assertEquals(o.getX(), before);
+    	
+    	o.move();
+    	Assertions.assertNotEquals(o.getX(), before);
+    }
+    
+    @org.junit.jupiter.api.Test
+    void movePowerUpTest(){
+    	int before = PUp.getX();
+    	Assertions.assertEquals(PUp.getX(), before);
+    	
+    	PUp.move();
+    	Assertions.assertNotEquals(PUp.getX(), before);
+    }
 
     @org.junit.jupiter.api.Test
     void looperObstacleTest(){
@@ -125,9 +143,86 @@ public class Test {
     }
 
     //Test for Sound Class
+    
     @org.junit.jupiter.api.Test
     void soundTest(){
-        Assertions.assertEquals(music.playMusic(),0);
+        Assertions.assertEquals(music.playMusic("main/Tours-Enthusiast.wav"),0);
+        Assertions.assertEquals(music.playMusic("main/Tours-Enthusias.wav"),1);
+        
+    }
+    
+    //Test for PowerUp Class
+    
+    @org.junit.jupiter.api.Test
+    void getXPowerUpTest(){
+    	Assertions.assertEquals(PUp.getX(), 100);
+    }
+    
+    @org.junit.jupiter.api.Test
+    void getYPowerUpTest(){
+    	Assertions.assertEquals(PUp.getY(), 475);
+    }
+    
+    @org.junit.jupiter.api.Test
+    void setXPowerUpTest(){
+    	PUp.setX(200);
+    	Assertions.assertEquals(PUp.getX(), 200);
+    	PUp.setX(-30);
+    	Assertions.assertEquals(PUp.getX(), 200);
+    }
+    
+    @org.junit.jupiter.api.Test
+    void setYPowerUpTest(){
+    	PUp.setY(500);
+    	Assertions.assertEquals(PUp.getY(), 500);
+    	PUp.setY(30);
+    	Assertions.assertEquals(PUp.getY(), 500);
+    }
+    
+    @org.junit.jupiter.api.Test
+    void looperPowerUpTest(){
+    	int testCase;
+ 
+    	testCase = this.PUp.looperX(-15, 100);
+    	Assertions.assertEquals(testCase, 4000);
+    	
+    	testCase = this.PUp.looperX(100, 5);
+    	Assertions.assertEquals(testCase, 95);
+    }
+    
+    @org.junit.jupiter.api.Test
+    void crashTest(){
+    	for(int i=0; i <= 200; ++i) {
+        	for(int j= 0; j <= 40; ++j) {
+        		points1.add(new Point(i,j));
+        	}
+        }
+    	
+    	for(int i=0; i <= 2; ++i) {
+        	for(int j= 30; j <= 80; ++j) {
+        		points2.add(new Point(i,j));
+        	}
+        }
+    	
+    	Assertions.assertEquals( g.crash(points1, points2), true);
+    	
+    	points2.clear();
+    	for(int i=0; i <= 2; ++i) {
+        	for(int j= 70; j <= 80; ++j) {
+        		points2.add(new Point(i,j));
+        	}
+        }
+    	Assertions.assertEquals( g.crash(points1, points2), false);
+    }
+    
+    @org.junit.jupiter.api.Test
+    void CarTest(){
+    	try{
+    		g.main(null);
+    		
+    	}catch(Exception e){
+    		Assertions.fail();
+    	}
     }
 
 
