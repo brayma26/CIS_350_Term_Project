@@ -72,7 +72,7 @@ public class Car{
     }
     
     /**
-     * A method to obtain the Array List of points that represent an car.
+     * A method to obtain the Array List of points that represent a car.
      * @return An Array List of points representing the car.
      */
     public ArrayList<Point> getPoints(){
